@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>English & Technical Terms Quiz</title>
+<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700&family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg1:#e9e4f7; --bg2:#fde8e4;
+  --card:#ffffffee;
+  --ink:#2f2e4a; --muted:#78779a;
+  --primary:#7b83e6; --primary-d:#5a62c9; --primary-l:#eceefe;
+  --accent:#f5a98f;
+  --ok:#4fb38a; --ok-l:#e2f6ee;
+  --bad:#e57f95; --bad-l:#fde8ed;
+  --line:#e6e4f2;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{
+  font-family:'Poppins','Tajawal',system-ui,sans-serif;
+  color:var(--ink);
+  background:
+    radial-gradient(circle at 12% 18%,rgba(123,131,230,.28),transparent 42%),
+    radial-gradient(circle at 88% 82%,rgba(245,169,143,.30),transparent 40%),
+    radial-gradient(circle at 80% 10%,rgba(120,205,200,.22),transparent 35%),
+    linear-gradient(135deg,var(--bg1),var(--bg2));
+  background-attachment:fixed;
+  min-height:100vh;display:flex;flex-direction:column;align-items:center;
+  padding:24px 16px 16px;
+}
+.ar{font-family:'Tajawal','Poppins',sans-serif;direction:rtl;text-align:right}
+main{flex:1;width:100%;max-width:760px;display:flex;align-items:center;justify-content:center}
+.card{
+  width:100%;background:var(--card);border-radius:24px;padding:32px 28px;
+  box-shadow:0 16px 48px rgba(90,98,201,.16);
+  backdrop-filter:blur(8px);
+  animation:fade .35s ease;
+}
+@keyframes fade{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+.hidden{display:none!important}
+
+/* Welcome */
+.welcome{text-align:center}
+.logo{
+  width:84px;height:84px;border-radius:50%;margin:0 auto 18px;
+  background:linear-gradient(135deg,#7b83e6,#f5a98f);
+  display:flex;align-items:center;justify-content:center;font-size:40px;
+  box-shadow:0 10px 24px rgba(123,131,230,.40);
+}
+.welcome h1{font-size:26px;font-weight:600;margin-bottom:6px}
+.welcome h2{font-size:24px;font-weight:700;color:var(--primary-d);margin-bottom:18px}
+.welcome p.sub{color:var(--muted);margin-bottom:22px;line-height:1.6}
+.info{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-bottom:28px}
+.info div{background:var(--primary-l);border-radius:14px;padding:14px 10px;font-size:14px}
+.info b{display:block;font-size:20px;color:var(--primary-d)}
+.info span.ar{display:block;font-size:14px;text-align:center;color:var(--muted)}
+input.name{
+  width:100%;padding:14px 16px;border:2px solid var(--line);border-radius:14px;
+  font-size:16px;text-align:center;outline:none;margin-bottom:18px;font-family:inherit;
+}
+input.name:focus{border-color:var(--primary)}
+.btn{
+  border:none;cursor:pointer;font-family:inherit;font-size:17px;font-weight:600;
+  padding:14px 36px;border-radius:14px;color:#fff;
+  background:linear-gradient(135deg,#7b83e6,#9a7be0);
+  box-shadow:0 8px 18px rgba(123,131,230,.35);
+  transition:.2s;
+}
+.btn:hover{background:linear-gradient(135deg,#6a73dc,#8a69d6);transform:translateY(-1px)}
+.btn:disabled{background:#d6d5e6;box-shadow:none;cursor:not-allowed;transform:none}
+
+/* Quiz */
+.top{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;font-size:14px;color:var(--muted)}
+.badge{padding:5px 14px;border-radius:20px;font-weight:600;font-size:13px}
+.badge.mcq{background:var(--primary-l);color:var(--primary-d)}
+.badge.tf{background:#ffeee7;color:#d2714f}
+.bar{height:8px;background:var(--line);border-radius:8px;overflow:hidden;margin-bottom:26px}
+.bar i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--primary),var(--accent));transition:width .4s}
+.qen{font-size:20px;font-weight:600;line-height:1.5;margin-bottom:8px}
+.qar{font-size:19px;color:var(--muted);line-height:1.7;margin-bottom:22px;font-weight:500}
+.opts{display:flex;flex-direction:column;gap:12px}
+.opt{
+  border:2px solid var(--line);background:#fff;border-radius:16px;padding:13px 16px;
+  cursor:pointer;display:flex;align-items:center;gap:14px;text-align:left;
+  font-family:inherit;color:var(--ink);transition:.2s;width:100%;
+}
+.opt:hover:not(:disabled){border-color:var(--primary);background:#f7f8ff;box-shadow:0 4px 12px rgba(123,131,230,.15)}
+.opt .l{
+  min-width:34px;height:34px;border-radius:50%;background:var(--primary-l);color:var(--primary-d);
+  display:flex;align-items:center;justify-content:center;font-weight:600;
+}
+.opt .t{flex:1}
+.opt .t b{display:block;font-weight:500;font-size:16px}
+.opt .t span{display:block;font-size:15px;color:var(--muted);direction:rtl;text-align:right;font-family:'Tajawal',sans-serif}
+.opt.correct{border-color:var(--ok);background:var(--ok-l)}
+.opt.correct .l{background:var(--ok);color:#fff}
+.opt.wrong{border-color:var(--bad);background:var(--bad-l)}
+.opt.wrong .l{background:var(--bad);color:#fff}
+.opt:disabled{cursor:default}
+.tf-row{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.tf-row .opt{justify-content:center;flex-direction:column;gap:2px;padding:18px 10px;text-align:center}
+.tf-row .opt b{font-size:18px}
+.tf-row .opt span{font-size:17px;color:var(--muted);font-family:'Tajawal',sans-serif}
+.fb{margin-top:18px;padding:12px 16px;border-radius:12px;font-size:15px;font-weight:500;display:none}
+.fb.ok{display:block;background:var(--ok-l);color:#2f8a67}
+.fb.no{display:block;background:var(--bad-l);color:#c0506b}
+.nav{margin-top:22px;display:flex;justify-content:flex-end}
+
+/* Result */
+.result{text-align:center}
+.ring{
+  width:170px;height:170px;border-radius:50%;margin:10px auto 18px;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  background:conic-gradient(var(--primary) var(--p),var(--line) 0);
+  position:relative;
+}
+.ring::before{content:"";position:absolute;inset:12px;background:#fff;border-radius:50%}
+.ring *{position:relative}
+.ring .n{font-size:40px;font-weight:700;color:var(--primary-d);line-height:1}
+.ring .o{font-size:15px;color:var(--muted)}
+.result h2{font-size:24px;margin-bottom:4px}
+.result .msg{color:var(--muted);margin-bottom:6px}
+.stats{display:flex;gap:12px;justify-content:center;margin:18px 0}
+.stats div{flex:1;border-radius:14px;padding:12px;font-size:14px}
+.stats .g{background:var(--ok-l);color:#2f8a67}
+.stats .r{background:var(--bad-l);color:#c0506b}
+.stats b{display:block;font-size:22px}
+.review{text-align:left;margin-top:18px;max-height:360px;overflow:auto;border-top:1px solid var(--line);padding-top:14px}
+.review h3{font-size:16px;margin-bottom:10px}
+.ri{background:#fafaff;border:1px solid var(--line);border-radius:12px;padding:10px 14px;margin-bottom:10px;font-size:14px}
+.ri .a{color:var(--ok);font-weight:600;margin-top:4px}
+.ri .y{color:var(--bad);margin-top:2px}
+
+footer{margin-top:18px;text-align:center;font-size:13px;color:var(--muted);line-height:1.7}
+footer b{color:var(--primary-d)}
+@media(max-width:520px){
+  .card{padding:24px 18px}.qen{font-size:18px}.info{grid-template-columns:1fr 1fr}
+}
+</style>
+</head>
+<body>
+<main>
+
+<!-- Welcome -->
+<section id="welcome" class="card welcome">
+  <div class="logo">🎓</div>
+  <h1>Welcome to the Quiz</h1>
+  <h2 class="ar" style="text-align:center">أهلاً بك في الاختبار</h2>
+  <p class="sub">English Grammar &amp; Technical Terms<br><span class="ar" style="display:block;text-align:center">قواعد اللغة الإنجليزية والمصطلحات التقنية</span></p>
+  <div class="info">
+    <div><b>40</b>Questions<span class="ar">سؤال</span></div>
+    <div><b>20 + 20</b>MCQ + True/False<span class="ar">اختيار من متعدد + صح وخطأ</span></div>
+    <div><b>1 by 1</b>One question per page<span class="ar">سؤال واحد في كل صفحة</span></div>
+    <div><b>/ 40</b>Final score<span class="ar">الدرجة النهائية</span></div>
+  </div>
+  <button class="btn" id="startBtn">Start Quiz / ابدأ الاختبار</button>
+</section>
+
+<!-- Quiz -->
+<section id="quiz" class="card hidden">
+  <div class="top">
+    <span id="count">Question 1 / 40</span>
+    <span class="badge" id="badge"></span>
+  </div>
+  <div class="bar"><i id="prog"></i></div>
+  <div class="qen" id="qen"></div>
+  <div class="qar ar" id="qar"></div>
+  <div id="opts"></div>
+  <div class="fb" id="fb"></div>
+  <div class="nav"><button class="btn" id="nextBtn" disabled>Next / التالي ➜</button></div>
+</section>
+
+<!-- Result -->
+<section id="result" class="card result hidden">
+  <h2 id="rname">Well done!</h2>
+  <div class="ring" id="ring"><span class="n" id="rscore">0</span><span class="o">out of 40 / من 40</span></div>
+  <div class="msg" id="rmsg"></div>
+  <div class="msg ar" id="rmsgar" style="text-align:center"></div>
+  <div class="stats">
+    <div class="g"><b id="rc">0</b>Correct / صحيحة</div>
+    <div class="r"><b id="rw">0</b>Wrong / خاطئة</div>
+  </div>
+  <button class="btn" id="again">Try Again / إعادة الاختبار</button>
+  <div class="review" id="review"></div>
+</section>
+
+</main>
+
+<footer>
+  © 2026 <b>All Rights Reserved</b><br>
+  Programmed by: <b>Ali Adnan</b>
+</footer>
+
+<script>
+// ===== Questions =====
+const M = (en, ar, opts, a) => ({type:'mcq', en, ar, opts, a});
+const T = (en, ar, a) => ({type:'tf', en, ar, a});
+
+const mcqs = [
+  M("Which of the following is an example of hardware?","أي مما يلي مثال على العتاد (Hardware)؟",
+    [["Keyboard","لوحة المفاتيح"],["Google Chrome","جوجل كروم"],["Windows","ويندوز"],["Password","كلمة المرور"]],0),
+  M("______ is your teacher? – Mr. Ali.","______ هو معلمك؟ – السيد علي.",
+    [["Where","أين"],["Who","مَن"],["Why","لماذا"],["When","متى"]],1),
+  M("What is a network?","ما هي الشبكة (Network)؟",
+    [["A group of devices connected together to exchange information","مجموعة أجهزة متصلة معاً لتبادل المعلومات"],["A program used to edit photos","برنامج لتعديل الصور"],["A device that prints documents","جهاز لطباعة المستندات"],["A secret code to protect an account","رمز سري لحماية الحساب"]],0),
+  M("She ______ at a hospital.","هي ______ في مستشفى.",
+    [["work","work"],["works","works"],["working","working"],["worked","worked"]],1),
+  M("What does RAM stand for?","ماذا تعني كلمة RAM؟",
+    [["Random Access Memory","ذاكرة الوصول العشوائي"],["Read Any Memory","ذاكرة قراءة أي شيء"],["Rapid Access Module","وحدة وصول سريع"],["Remote Access Memory","ذاكرة وصول عن بُعد"]],0),
+  M("He doesn't ______ TV at night.","هو لا ______ التلفاز في الليل.",
+    [["watches","watches"],["watch","watch"],["watched","watched"],["watching","watching"]],1),
+  M("Which device is an OUTPUT device?","أي جهاز مما يلي هو جهاز إخراج (Output)؟",
+    [["Monitor","الشاشة"],["Keyboard","لوحة المفاتيح"],["Mouse","الفأرة"],["Camera","الكاميرا"]],0),
+  M("I am ______ English right now.","أنا ______ اللغة الإنجليزية الآن.",
+    [["study","study"],["studies","studies"],["studying","studying"],["studied","studied"]],2),
+  M("Which one is a web browser?","أي مما يلي هو متصفح ويب؟",
+    [["Google Chrome","جوجل كروم"],["Linux","لينكس"],["SSD","قرص SSD"],["Printer","الطابعة"]],0),
+  M("What is the correct spelling of (Swim + ing)?","ما هو الإملاء الصحيح لـ (Swim + ing)؟",
+    [["Swiming","Swiming"],["Swimming","Swimming"],["Swimeing","Swimeing"],["Swimmeing","Swimmeing"]],1),
+  M("What does URL stand for?","ماذا تعني كلمة URL؟",
+    [["Uniform Resource Locator","محدد موقع الموارد الموحد"],["Universal Real Link","رابط حقيقي عالمي"],["User Remote Login","تسجيل دخول المستخدم عن بُعد"],["United Resource List","قائمة الموارد المتحدة"]],0),
+  M("What is the past form of the verb (go)?","ما هو الماضي للفعل (go)؟",
+    [["goed","goed"],["gone","gone"],["went","went"],["goes","goes"]],2),
+  M("What does a server do?","ماذا يفعل الخادم (Server)؟",
+    [["Provides services or information to other computers","يقدّم خدمات أو معلومات للحواسيب الأخرى"],["Prints documents on paper","يطبع المستندات على الورق"],["Displays images on the screen","يعرض الصور على الشاشة"],["Types letters and numbers","يكتب الحروف والأرقام"]],0),
+  M("I didn't ______ to work yesterday.","أنا لم ______ إلى العمل البارحة.",
+    [["went","went"],["go","go"],["going","going"],["goes","goes"]],1),
+  M("Which one keeps information even when the computer is turned off?","أي مما يلي يحتفظ بالمعلومات حتى عند إطفاء الحاسوب؟",
+    [["RAM","الذاكرة العشوائية RAM"],["Storage","وحدة التخزين"],["Input","الإدخال"],["Output","الإخراج"]],1),
+  M("______ you go to Baghdad last week?","______ أنت ذهبت إلى بغداد الأسبوع الماضي؟",
+    [["Do","Do"],["Does","Does"],["Did","Did"],["Are","Are"]],2),
+  M("What is encryption?","ما هو التشفير (Encryption)؟",
+    [["Changing information into a protected form that unauthorized people cannot easily understand","تحويل المعلومات إلى شكل محمي لا يفهمه غير المصرّح لهم بسهولة"],["Deleting all files from a computer","حذف جميع الملفات من الحاسوب"],["Connecting two computers with a cable","ربط حاسوبين بكيبل"],["Searching for websites","البحث عن مواقع الويب"]],0),
+  M("______ phone is this? – It's mine.","______ هذا الهاتف؟ – إنه لي.",
+    [["Which","Which"],["Whose","Whose"],["Where","Where"],["Who","Who"]],1),
+  M("The CPU is often described as:","غالباً يُوصف المعالج (CPU) بأنه:",
+    [["The brain of the computer","عقل الحاسوب"],["The screen of the computer","شاشة الحاسوب"],["The keyboard of the computer","لوحة مفاتيح الحاسوب"],["The cable of the computer","سلك الحاسوب"]],0),
+  M("We ______ in Iraq this week (temporary).","نحن ______ في العراق هذا الأسبوع (مؤقتاً).",
+    [["stay","stay"],["are staying","are staying"],["stayed","stayed"],["stays","stays"]],1)
+];
+
+const tfs = [
+  T("Software can be physically touched.","يمكن لمس البرمجيات (Software) فعلياً بالأيدي.",false),
+  T("A password helps protect an account from unauthorized access.","كلمة المرور تساعد في حماية الحساب من الدخول غير المصرّح به.",true),
+  T("Uploading means sending a file from your device to the Internet.","الرفع (Upload) يعني إرسال ملف من جهازك إلى الإنترنت.",true),
+  T("We add (s/es) to the verb with He / She / It in Present Simple.","نضيف (s/es) إلى الفعل مع He / She / It في المضارع البسيط.",true),
+  T("A printer is an input device.","الطابعة هي جهاز إدخال.",false),
+  T("The sentence “She doesn't works here” is correct.","الجملة “She doesn't works here” صحيحة.",false),
+  T("An SSD is generally faster and quieter than a traditional hard drive.","قرص SSD أسرع وأهدأ عموماً من القرص الصلب التقليدي.",true),
+  T("Present Continuous is formed with: Subject + am / is / are + verb-ing.","المضارع المستمر يتكوّن من: الفاعل + am / is / are + الفعل مع ing.",true),
+  T("The Internet is a global network that connects millions of computers and devices.","الإنترنت شبكة عالمية تربط ملايين الحواسيب والأجهزة.",true),
+  T("“Yesterday” is a time clue for the Present Continuous.","كلمة “Yesterday” دليل على زمن المضارع المستمر.",false),
+  T("A client is a device that requests services or information from a server.","العميل (Client) هو جهاز يطلب خدمات أو معلومات من الخادم.",true),
+  T("The sentence “I didn't went to work” is correct.","الجملة “I didn't went to work” صحيحة.",false),
+  T("Downloading means transferring data from your device to the Internet.","التنزيل (Download) يعني نقل البيانات من جهازك إلى الإنترنت.",false),
+  T("The past form of the verb (buy) is “bought”.","الماضي للفعل (buy) هو “bought”.",true),
+  T("Wi-Fi allows devices to connect to a network without physical cables.","تتيح شبكة Wi-Fi للأجهزة الاتصال بالشبكة بدون كيبلات.",true),
+  T("We use “Does” with I / you / we / they.","نستخدم “Does” مع I / you / we / they.",false),
+  T("A mouse is an output device.","الفأرة (Mouse) هي جهاز إخراج.",false),
+  T("We use “What” to ask about a person.","نستخدم “What” للسؤال عن شخص.",false),
+  T("Present Simple is used to talk about routines, such as “every day”.","المضارع البسيط يُستخدم للحديث عن الروتين مثل “كل يوم”.",true),
+  T("When we add -ing to the verb “Like”, we drop the final e: Liking.","عند إضافة ing إلى الفعل “Like” نحذف حرف e الأخير: Liking.",true)
+];
+
+// alternate: MCQ, T/F, MCQ, T/F ...
+const Q = [];
+for (let i = 0; i < 20; i++) { Q.push(mcqs[i]); Q.push(tfs[i]); }
+
+// ===== App =====
+const $ = id => document.getElementById(id);
+let idx = 0, score = 0, answered = false, wrongList = [], userName = "";
+
+function show(id){ ["welcome","quiz","result"].forEach(s => $(s).classList.toggle("hidden", s !== id)); window.scrollTo(0,0); }
+
+$("startBtn").onclick = () => { userName = ""; idx = 0; score = 0; wrongList = []; show("quiz"); render(); };
+$("again").onclick = () => show("welcome");
+$("nextBtn").onclick = () => { idx++; idx < Q.length ? render() : finish(); };
+
+function render(){
+  const q = Q[idx]; answered = false;
+  $("count").textContent = `Question ${idx+1} / 40  •  السؤال ${idx+1} من 40`;
+  $("prog").style.width = (idx/Q.length*100) + "%";
+  const b = $("badge");
+  b.className = "badge " + q.type;
+  b.textContent = q.type === "mcq" ? "Multiple Choice • اختيار متعدد" : "True / False • صح أو خطأ";
+  $("qen").textContent = q.en;
+  $("qar").textContent = q.ar;
+  $("fb").className = "fb"; $("fb").textContent = "";
+  $("nextBtn").disabled = true;
+  $("nextBtn").textContent = idx === Q.length-1 ? "Show Result / عرض النتيجة ✓" : "Next / التالي ➜";
+
+  const box = $("opts"); box.innerHTML = "";
+  if (q.type === "mcq"){
+    const wrap = document.createElement("div"); wrap.className = "opts";
+    q.opts.forEach((o,i) => {
+      const bt = document.createElement("button"); bt.className = "opt";
+      bt.innerHTML = `<span class="l">${"ABCD"[i]}</span><span class="t"><b></b><span></span></span>`;
+      bt.querySelector("b").textContent = o[0];
+      bt.querySelector(".t span").textContent = o[1];
+      bt.onclick = () => answer(i);
+      wrap.appendChild(bt);
+    });
+    box.appendChild(wrap);
+  } else {
+    const wrap = document.createElement("div"); wrap.className = "tf-row";
+    [[true,"True","صح ✓"],[false,"False","خطأ ✗"]].forEach(([v,en,ar]) => {
+      const bt = document.createElement("button"); bt.className = "opt";
+      bt.innerHTML = `<b>${en}</b><span>${ar}</span>`;
+      bt.onclick = () => answer(v);
+      bt.dataset.v = v;
+      wrap.appendChild(bt);
+    });
+    box.appendChild(wrap);
+  }
+}
+
+function answer(choice){
+  if (answered) return; answered = true;
+  const q = Q[idx];
+  const btns = [...document.querySelectorAll("#opts .opt")];
+  btns.forEach(b => b.disabled = true);
+  let correct, chosenEl, rightEl;
+  if (q.type === "mcq"){
+    correct = choice === q.a; chosenEl = btns[choice]; rightEl = btns[q.a];
+  } else {
+    correct = choice === q.a;
+    chosenEl = btns.find(b => b.dataset.v === String(choice));
+    rightEl = btns.find(b => b.dataset.v === String(q.a));
+  }
+  rightEl.classList.add("correct");
+  const fb = $("fb");
+  if (correct){ score++; fb.className = "fb ok"; fb.textContent = "✔ Correct! • إجابة صحيحة"; }
+  else {
+    chosenEl.classList.add("wrong");
+    fb.className = "fb no"; fb.textContent = "✘ Wrong • إجابة خاطئة";
+    wrongList.push({q, choice});
+  }
+  $("nextBtn").disabled = false;
+}
+
+function ansText(q, v){
+  if (q.type === "mcq") return `${"ABCD"[v]}) ${q.opts[v][0]} — ${q.opts[v][1]}`;
+  return v ? "True — صح" : "False — خطأ";
+}
+
+function finish(){
+  $("prog").style.width = "100%";
+  show("result");
+  $("rname").textContent = userName ? `Well done, ${userName}!` : "Quiz Completed!";
+  $("rscore").textContent = score;
+  $("ring").style.setProperty("--p", (score/40*100) + "%");
+  $("rc").textContent = score; $("rw").textContent = 40 - score;
+  const p = score/40*100;
+  let en, ar;
+  if (p >= 90){ en="Excellent! Outstanding performance."; ar="ممتاز! أداء رائع."; }
+  else if (p >= 75){ en="Very good! Keep it up."; ar="جيد جداً! واصل التقدم."; }
+  else if (p >= 60){ en="Good. A little more review will help."; ar="جيد. مراجعة بسيطة ستساعدك."; }
+  else if (p >= 50){ en="Pass. Please review the lessons again."; ar="مقبول. يُفضّل مراجعة الدروس مرة أخرى."; }
+  else { en="Needs improvement. Review the material and try again."; ar="تحتاج إلى تحسين. راجع المادة وحاول مجدداً."; }
+  $("rmsg").textContent = en; $("rmsgar").textContent = ar;
+
+  const rv = $("review"); rv.innerHTML = "";
+  if (wrongList.length){
+    const h = document.createElement("h3"); h.textContent = "Review your mistakes • مراجعة الأخطاء"; rv.appendChild(h);
+    wrongList.forEach(w => {
+      const d = document.createElement("div"); d.className = "ri";
+      const a = document.createElement("div"); a.textContent = w.q.en;
+      const b = document.createElement("div"); b.className = "ar"; b.textContent = w.q.ar;
+      const y = document.createElement("div"); y.className = "y"; y.textContent = "Your answer: " + ansText(w.q, w.choice);
+      const c = document.createElement("div"); c.className = "a"; c.textContent = "Correct answer: " + ansText(w.q, w.q.a);
+      d.append(a,b,y,c); rv.appendChild(d);
+    });
+  } else {
+    rv.innerHTML = '<h3 style="text-align:center">🎉 Perfect score! • درجة كاملة!</h3>';
+  }
+}
+</script>
+</body>
+</html>
